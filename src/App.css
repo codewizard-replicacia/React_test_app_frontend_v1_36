@@ -1,0 +1,86 @@
+.header-items{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-items{
+    display: flex;
+    align-items: center;
+}
+.dashboard-container{
+    margin-top: 16px !important;
+    justify-content: center;
+}
+.page-heading{
+    margin: 15px 0px 15px 15px !important;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom:15px;
+    margin-right:15px;
+}
+.margin-right{
+    margin-right:8px !important;
+}
+.form-container{
+    margin:15px !important;
+}
+.MuiTypography-h6{
+font-weight: 600 !important;
+}  
+.Mui-focused{
+    border:1px solid rgba(0, 0, 0, 0.23) !important;
+    height:40px !important;
+}
+
+.row-label p{
+    font-weight: 700;
+    white-space: pre !important;
+}
+
+.orders-list{
+    text-align: left;
+    justify-content: stretch;
+    margin-top: 15px;
+}
+
+.single-order{
+    margin: 4%;
+   display: flex;
+   position: relative;
+   width: fit-content;
+}
+
+.order-img-container{
+    margin-right: 10px;
+}
+.orderType{
+    position: absolute;
+    font-size: 9px !important;
+    font-weight: 900;
+   left: -14px;
+    top: -10px;
+}
+
+.MuiTableSortLabel-icon{
+    opacity: 1 !important;
+}
+
+@media screen and (max-width: 600px){
+.responsive-table-row{
+    display: grid !important;
+}
+.MuiTypography-root{
+    text-align: left !important;
+}
+.MuiTable-root{
+    width:100% !important;
+    margin:0 !important;
+}
+main{
+    width:auto !important;
+}
+}

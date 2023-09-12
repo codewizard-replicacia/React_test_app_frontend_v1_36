@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="true" Name="Document">
+                <Key>
+                    <PropertyRef Name="DocId"/>
+                </Key>
+                <Property Name="DocId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="FileType" Type="Edm.String" isUnique="false"/>
+                <Property Name="FileName" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Product">
+                <Key>
+                    <PropertyRef Name="ProductId"/>
+                </Key>
+                <Property Name="ProductId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ProductName" Type="Edm.String" isUnique="false"/>
+                <Property Name="ProductDescription" Type="Edm.String" isUnique="false"/>
+                <Property Name="ProductImage" Type="Edm.String" isUnique="false"/>
+                <Property Name="ProductType" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Stock" Type="Collection(Model.Inventory)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Vendor">
+                <Key>
+                    <PropertyRef Name="VendorID"/>
+                </Key>
+                <Property Name="VendorID" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ProductName" Type="Edm.String" isUnique="false"/>
+                <Property Name="UnitsPurchased" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="PricePerUnit" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="VendorAddress" Type="Edm.String" isUnique="false"/>
+                <Property Name="VendorContact" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="TotalPrice" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="VendorName" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Orderdetails" Type="Collection(Model.PurchaseOrder)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="OrderAlert">
+                <Key>
+                    <PropertyRef Name="OrderAlertId"/>
+                </Key>
+                <Property Name="OrderAlertId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="StockAlertmsg" Type="Edm.String" isUnique="false"/>
+                <Property Name="PhNum" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="ProductName" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="ProductVendor" Type="Collection(Model.Vendor)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Inventory">
+                <Key>
+                    <PropertyRef Name="InventoryId"/>
+                </Key>
+                <Property Name="InventoryId" Type="Edm.String" isUnique="false"/>
+                <Property Name="ExpirtyDate" Type="Edm.Date" isUnique="false"/>
+                <Property Name="PurchasedDate" Type="Edm.Date" isUnique="false"/>
+                <Property Name="VendorName" Type="Edm.String" isUnique="false"/>
+                <Property Name="CurrentStockUnits" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="InStockUnits" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Stockalert" Type="Collection(Model.OrderAlert)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="PurchaseOrder">
+                <Key>
+                    <PropertyRef Name="PurchaseOrderId"/>
+                </Key>
+                <Property Name="PurchaseOrderId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ProductName" Type="Edm.String" isUnique="false"/>
+                <Property Name="Discount" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="PurchaseOrderDate" Type="Edm.Date" isUnique="false"/>
+                <Property Name="Invoice" Type="Edm.String" isUnique="false"/>
+                <Property Name="TaxGSTAmount" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ExchangeDate" Type="Edm.Int32" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Restuarant">
+                <Key>
+                    <PropertyRef Name="RestuarantID"/>
+                </Key>
+                <Property Name="RestuarantID" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="OwnerName" Type="Edm.String" isUnique="false"/>
+                <Property Name="OwnerPh" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="RestuarantName" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Products" Type="Collection(Model.Product)"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Documents" EntityType="Model.Document"/>
+                <EntitySet Name="Products" EntityType="Model.Product">
+                    <NavigationPropertyBinding Path="Stock" Target="Inventories"/>
+                </EntitySet>
+                <EntitySet Name="Vendors" EntityType="Model.Vendor">
+                    <NavigationPropertyBinding Path="Orderdetails" Target="PurchaseOrders"/>
+                </EntitySet>
+                <EntitySet Name="OrderAlerts" EntityType="Model.OrderAlert">
+                    <NavigationPropertyBinding Path="ProductVendor" Target="Vendors"/>
+                </EntitySet>
+                <EntitySet Name="Inventories" EntityType="Model.Inventory">
+                    <NavigationPropertyBinding Path="Stockalert" Target="OrderAlerts"/>
+                </EntitySet>
+                <EntitySet Name="PurchaseOrders" EntityType="Model.PurchaseOrder"/>
+                <EntitySet Name="Restuarants" EntityType="Model.Restuarant">
+                    <NavigationPropertyBinding Path="Products" Target="Products"/>
+                </EntitySet>
+            </EntityContainer>
+            <EnumType Name="ProductType">
+                <Member Name="Edible" Value="0"/>
+                <Member Name="Cleaning" Value="1"/>
+                <Member Name="Grooming" Value="2"/>
+            </EnumType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  reactui:
+    container_name: reactui_test_app_frontend_v1_41
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
